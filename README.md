@@ -1,6 +1,12 @@
 # 0から始める環境ゲノム配列解析
 ゲノム配列解析アルゴリズムに関する備忘録的まとめ
 
+## まとめていきたい項目リスト
+- \[WIP\][配列アラインメントアルゴリズムについて](https://github.com/nos-urbanenv/genome_algorithms/blob/main/alighment/introduction.md)
+- \[WIP\][メタゲノム解析の実際](https://github.com/nos-urbanenv/genome_algorithms/blob/main/metagenome/introduction.md)
+- \[WIP\][環境工学におけるNGS解析の実用例](https://github.com/nos-urbanenv/genome_algorithms/blob/main/wastewater/introduction.md)
+- \[WIP\][RNA二次構造予測](https://github.com/nos-urbanenv/genome_algorithms/blob/main/RNA_structure/introduction.md)
+
 ## 本稿執筆の動機
 都市工学科に進学してから、情報解析と実験を両立できる研究分野をずっと探していた。
 学部3年の春にふと、ゲノム情報解析に関わる研究であれば、その理想に近づけるのではないかと考え、農学部の入門的な講義をまず履修してみた。その講義をきっかけにバイオインフォにハマったため、生物情報科学の専門課程の講義を受けてみようと考えた。ちょうど良いタイミングでS2タームから理学部生物情報科学科の「ゲノム配列解析論Ⅰ」が開講されているのをシラバスで発見し、初めて扱う確率モデルやアルゴリズムとの新鮮な出会いを楽しみつつ、何とか単位も取得することができた。
