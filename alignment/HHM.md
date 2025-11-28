@@ -2,10 +2,10 @@
 隠れマルコフモデルに関する解説の書籍は多数出回っているので、いまさら何を書くべきだろうか？
 
 隠れマルコフモデル*M*は以下のように定義される。
-$M = {S,\Sigma, A, E}$
-$S = {s_0, s_1, ..., s_{m-1}}$
-$A = a_{ij}$
-$B = {e(s_i, c_k)=e_i(c_k)=e_{ik}=e(c_k|s_i)}$
+$M = {S,\Sigma, A, E}$ \\
+$S = {s_0, s_1, ..., s_{m-1}}$\\
+$A = a_{ij}$\\
+$B = {e(s_i, c_k)=e_i(c_k)=e_{ik}=e(c_k|s_i)}$\\
 
 配列xが与えられたとき、最も確からしい状態列$\pi$を推定するためのアルゴリズムをViterbiアルゴリズムと呼ぶ。
 状態列推定のためにViterbi変数vを定義する。
@@ -23,15 +23,17 @@ $v_k(t) = max_{\pi|\pi_t=s_k}P(x_1...x_t,\pi_1...\pi_t)$
 
 そのうえで、Viterbiアルゴリズムは定義以下のように表される。
 最大確率の状態列を知るために、再帰処理の過程でトレースバック・ポインターptr_t(l)を記録しながら
+配列の長さはLとする。
 
 Initialization $v_0(0)=1, v_0(k)=0 for k>0$
-Recursion 
-$v_l(i)=e_l(x_i)max_k()$
-$$
-$$
-Termination
-
-Traceback
+Recursion\\
+$v_l(i)=e_l(x_i)max_k(v_k(i-1)a_{kl})$\\
+$ptr_l(i)=argmax_k v_k(i-1)a_{kl}$\\
+Termination\\
+$P(x,\pi^{\*})=max_k v_k(L)a_{k0}$\\
+$$\\
+Traceback\\
+$for i=L...1 \pi^\*_(i-1)=ptr_i(\pi^\*_i)$
 
 以上のアルゴリズムをPythonを使って実装してみよう。
 入力配列$x$は配列の形で与えられ、
@@ -46,15 +48,15 @@ BLASTをはじめとするゲノミクスの実用ソフトウェアにおいて
 
 Viterbiアルゴリズムによる解析からもわかる通り、確率モデルによる解析では状態遷移のたびに確率の乗算が行われる。
 乗算を加算に変えるためには、Viterbiアルゴリズムの再帰式の両辺をlogで変換すればよい。
-logで変換した後のViterbiアルゴリズムは以下のように表現できる。
+logで変換した後のViterbiアルゴリズムは以下のように表現できる。なお、初期化での「確率0」に関しては対数をとることができないが、
+この点に関しては0の対数を$-\inf$とすればよい。トレースバック・ポインターの記録とトレースバックは省略した。
 
-Log変換した後のViterbiアルゴリズム
-Initialization $$
-Recursion
-$log(v_l(i))=log(e_l(x_i))+max_klog()$
-$$
-$$
-
+Log変換した後のViterbiアルゴリズム\\
+Initialization $log(v_0(0))=0, log(v_0(k))=-\inf for k>0$\\
+Recursion\\
+$log(v_l(i))=log(e_l(x_i))+max_k (log(v_k(i-1)) + log(a_{kl}))$\\
+Finalization\\
+$log(P(x,\pi^{\*}))=max_k (log(v_k(L)) + log(a_{k0}))$\\
 得られた、最も確からしい配列\piが得られる確率
 
 # HMMの用例
